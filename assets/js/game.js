@@ -30,9 +30,6 @@ if (promptFight === "" || promptFight === null) {
 }
 
 var fight = function(enemyName) {
-    // repeat and execute as long as the enemy-robot is alive 
-    while (playerInfo.health > 0 && enemy.health > 0) {
-  // Gives players the option to fight or skip the game
 // repeat and execute as long as the enemy-robot is alive 
 while (playerInfo.health > 0 && enemy.health > 0) {
   fightOrSkip(); // <-- Replace code with this function call
@@ -156,25 +153,28 @@ var endGame = function() {
 var shop = function() {
   // ask player what they'd like to do
   var shopOptionPrompt = window.prompt(
-    "Would you like to REFILL your health, UPGRADE your attack, or LEAVE the store? Please enter one: 'REFILL', 'UPGRADE', or 'LEAVE' to make a choice."
+    "Would you like to REFILL your health, UPGRADE your attack, or LEAVE the store? Please enter one 1 for REFILL, 2 for UPGRADE, or 3 for LEAVE."
   );
+  
+  shopOptionPrompt = parseInt(shopOptionPrompt);
   // use switch to carry out action
 switch (shopOptionPrompt) {
-  case "REFILL":
-    case "refill":
-      playerInfo.refillHealth();
-      break;
-    case "UPGRADE":
-    case "upgrade":
-      playerInfo.upgradeAttack();
-      break;
-      case "LEAVE": //new case
-      case "leave":
-        window.alert("Leaving the store.");
-
-        break;
-        default:
-          window.alert('You did not pick a valid option. Try again.');
+ // use switch case to carry out action
+  case 1:
+    playerInfo.refillHealth();
+    break;
+  case 2:
+    playerInfo.upgradeAttack();
+    break;
+  case 3:
+    window.alert("Leaving the store.");
+    break;
+  default:
+    window.alert("You did not pick a valid option. Try again.");
+    shop();
+    break;
+}
+    window.alert('You did not pick a valid option. Try again.');
 
     // call shop() again to force player to pick a valid option
     shop();
